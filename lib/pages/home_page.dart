@@ -1,7 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lista_de_tarefas/widgets/atual_date_widget.dart';
 import 'package:lista_de_tarefas/widgets/icon_avatar.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -25,15 +28,12 @@ class _HomePageState extends State<HomePage> {
                   transform: GradientRotation(0.3)),
             ),
           ),
-          SafeArea(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 20,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: SafeArea(
+              child: Column(
+                children: [
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       IconAvatarWidget(),
@@ -43,8 +43,10 @@ class _HomePageState extends State<HomePage> {
                       )
                     ],
                   ),
-                )
-              ],
+                  SizedBox(height: 10),
+                  AtualDateWidget()
+                ],
+              ),
             ),
           )
         ],
