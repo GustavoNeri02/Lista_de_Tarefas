@@ -4,11 +4,13 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lista_de_tarefas/widgets/add_task_button_widget.dart';
 import 'package:lista_de_tarefas/widgets/atual_date_widget.dart';
 import 'package:lista_de_tarefas/widgets/icon_avatar.dart';
 import 'package:path_provider/path_provider.dart';
 
 class HomePage extends StatefulWidget {
+  final TextEditingController textController = new TextEditingController();
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -37,10 +39,8 @@ class _HomePageState extends State<HomePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       IconAvatarWidget(),
-                      IconButton(
-                        icon: Icon(Icons.add),
-                        onPressed: () {},
-                      )
+                      AddTaskButton(
+                          textEditingController: widget.textController),
                     ],
                   ),
                   SizedBox(height: 10),
