@@ -27,21 +27,23 @@ class _IconAvatarWidgetState extends State<IconAvatarWidget> {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Container(
-        height: 60,
-        width: 60,
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(00),
-            border: Border.all(color: Colors.black, width: 3)),
-        child: _image == null
-            ? Icon(
-                Icons.person_add,
-              )
-            : Image.file(
-                _image,
-                fit: BoxFit.fitWidth,
-              ),
-      ),
+          height: 60,
+          width: 60,
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(15),
+              border: Border.all(color: Colors.black, width: 3)),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: _image == null
+                ? Icon(
+                    Icons.person_add,
+                  )
+                : Image.file(
+                    _image,
+                    fit: BoxFit.cover,
+                  ),
+          )),
       onTap: () {
         _getImage();
       },
