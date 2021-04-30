@@ -27,17 +27,23 @@ class _IconAvatarWidgetState extends State<IconAvatarWidget> {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Container(
-          height: 60,
-          width: 60,
+          height: 75,
+          width: 75,
           decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(15),
-              border: Border.all(color: Colors.black, width: 3)),
+            gradient: LinearGradient(
+              colors: [Color(0XFF6200b3), Color(0XFF8B54C9)],
+              stops: [0, 0.7],
+              transform: GradientRotation(0.3),
+            ),
+            borderRadius: BorderRadius.circular(50),
+            border: Border.all(color: Colors.white, width: 3),
+          ),
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(47),
             child: _image == null
                 ? Icon(
                     Icons.person_add,
+                    color: Colors.white,
                   )
                 : Image.file(
                     _image,

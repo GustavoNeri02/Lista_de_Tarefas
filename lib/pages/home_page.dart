@@ -27,7 +27,8 @@ class _HomePageState extends State<HomePage> {
               gradient: LinearGradient(
                   colors: [Color(0XFF6200b3), Color(0XFF8B54C9)],
                   stops: [0, 0.7],
-                  transform: GradientRotation(0.3)),
+                  transform: GradientRotation(0.3),
+                  tileMode: TileMode.repeated),
             ),
           ),
           Padding(

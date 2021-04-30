@@ -11,7 +11,10 @@ class _AddTaskButtonState extends State<AddTaskButton> {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: Icon(Icons.add),
+      icon: Icon(
+        Icons.add,
+        color: Colors.white,
+      ),
       onPressed: () {
         widget.textEditingController.text = "";
         showDialog(

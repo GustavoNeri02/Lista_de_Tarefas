@@ -35,22 +35,21 @@ class _AtualDateWidgetState extends State<AtualDateWidget> {
   Widget build(BuildContext context) {
     return Container(
       height: 75,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(color: Colors.black, offset: Offset(1, 3), blurRadius: 10)
-          ],
-          //border: Border.all(color: Colors.black, width: 2)
-          color: Color(0xffcfb1ee)),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(
             "${now.day}",
-            style: GoogleFonts.overpass(color: Colors.black, fontSize: 70),
+            style: GoogleFonts.rubik(
+              color: Colors.white,
+              fontSize: 70,
+              shadows: [
+                Shadow(color: Colors.black, offset: Offset(0, 0), blurRadius: 2)
+              ],
+            ),
           ),
           SizedBox(
-            width: 5,
+            width: 10,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,13 +57,33 @@ class _AtualDateWidgetState extends State<AtualDateWidget> {
             children: [
               Text(
                 "${_weekDays[now.weekday]}",
-                style: GoogleFonts.overpass(
-                    color: Colors.black, fontWeight: FontWeight.bold),
+                style: GoogleFonts.rubik(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    shadows: [
+                      Shadow(
+                          color: Colors.black,
+                          offset: Offset(0, 0),
+                          blurRadius: 2)
+                    ]),
               ),
               Text(
-                "${_monthsYear[now.month - 1]} ${now.year}\n",
-                style: GoogleFonts.overpass(color: Colors.black, fontSize: 10),
+                "${_monthsYear[now.month - 1]} ${now.year}",
+                style: GoogleFonts.rubik(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w200,
+                    shadows: [
+                      Shadow(
+                          color: Colors.black,
+                          offset: Offset(0, 0),
+                          blurRadius: 2)
+                    ]),
               ),
+              SizedBox(
+                height: 7,
+              )
             ],
           )
         ],
