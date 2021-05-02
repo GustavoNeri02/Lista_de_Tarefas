@@ -8,13 +8,13 @@ class AtualDateWidget extends StatefulWidget {
 
 class _AtualDateWidgetState extends State<AtualDateWidget> {
   List<String> _weekDays = [
-    "Domingo",
     "Segunda-Feira",
     "Terça-Feira",
     "Quarta-Feira",
     "Quinta-Feira",
     "Sexta-Feira",
-    "Sabado",
+    "Sábado",
+    "Domingo"
   ];
   List<String> _monthsYear = [
     "Janeiro",
@@ -56,7 +56,7 @@ class _AtualDateWidgetState extends State<AtualDateWidget> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text(
-                "${_weekDays[now.weekday]}",
+                "${_weekDays[now.weekday-1]}",
                 style: GoogleFonts.rubik(
                     color: Colors.white,
                     fontSize: 20,

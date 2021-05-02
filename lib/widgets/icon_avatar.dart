@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:lista_de_tarefas/controller_avatar.dart';
 
 class IconAvatarWidget extends StatefulWidget {
   @override
@@ -9,22 +10,43 @@ class IconAvatarWidget extends StatefulWidget {
 }
 
 class _IconAvatarWidgetState extends State<IconAvatarWidget> {
+  ControllerAvatar controllerAvatar = ControllerAvatar();
+  File newImage;
   File _image;
   final picker = ImagePicker();
+
+  Future _startImage() async {
+    newImage = (await controllerAvatar.getImage());
+    setState(() {
+      _image = newImage;
+    });
+  }
 
   Future _getImage() async {
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
     setState(() {
       if (pickedFile != null) {
         _image = File(pickedFile.path);
-      } else {
+        controllerAvatar.saveImage(_image);
+      } else if (_image != null) {
+        _image = null;
+        controllerAvatar.deleteImage();
         print("Nenhuma imagem selecionada");
       }
     });
   }
 
   @override
+  void initState() {
+    super.initState();
+    setState(() {
+      controllerAvatar.getImage().then((value) => _image);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    _startImage();
     return GestureDetector(
       child: Container(
           height: 75,
@@ -51,7 +73,9 @@ class _IconAvatarWidgetState extends State<IconAvatarWidget> {
                   ),
           )),
       onTap: () {
-        _getImage();
+        setState(() {
+          _getImage();
+        });
       },
     );
   }
