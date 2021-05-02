@@ -2,15 +2,6 @@
 
 Aplicativo Lista de Tarefas desenvolvido no curso de flutter na Udemy
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![ade73a57-c14a-4d1c-9b1f-7cf9083800c8](https://user-images.githubusercontent.com/47922321/116826372-0b55fd80-ab6a-11eb-89cf-1885dbc0fe0f.jpg)
+![dea40645-7979-46cb-90e4-c26df3295e2b](https://user-images.githubusercontent.com/47922321/116826375-0f821b00-ab6a-11eb-9983-4fe615060398.jpg)
+![5dbe5a5e-cffd-4909-b811-059e1f8d01a5](https://user-images.githubusercontent.com/47922321/116826381-114bde80-ab6a-11eb-9e5b-a792c2e3ae0b.jpg)
