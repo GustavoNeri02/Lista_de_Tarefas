@@ -1,8 +1,6 @@
 # lista_de_tarefas
 
-Aplicativo Lista de Tarefas desenvolvido no curso de flutter na Udemy.
-Primeira experiência com Image_Picker.
-Me diverti e aprendi bastante trabalhando na UI do app.
+Aplicativo Lista de Tarefas desenvolvido no curso de flutter na Udemy
 
 ![1](https://user-images.githubusercontent.com/47922321/116826726-d8146e00-ab6b-11eb-8aaf-071f87c509d5.jpg)
 ![2](https://user-images.githubusercontent.com/47922321/116826727-d9459b00-ab6b-11eb-865f-4e378914576e.jpg)
