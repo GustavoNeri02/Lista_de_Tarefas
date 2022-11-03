@@ -41,12 +41,12 @@ class _IconAvatarWidgetState extends State<IconAvatarWidget> {
     super.initState();
     setState(() {
       controllerAvatar.getImage().then((value) => _image);
+      _startImage();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    _startImage();
     return GestureDetector(
       child: Container(
           height: 75,

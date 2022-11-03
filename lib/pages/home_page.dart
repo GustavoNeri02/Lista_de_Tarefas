@@ -222,14 +222,19 @@ class _HomePageState extends State<HomePage> {
                                     TextButton(
                                       child: Text("Ok"),
                                       onPressed: () {
-                                        setState(() {
-                                          addToDo();
-                                          controllerJson.saveFileData(toDoList);
-                                        });
+                                        if (textController.text != "") {
+                                          setState(() {
+                                            addToDo();
+                                            controllerJson
+                                                .saveFileData(toDoList);
+                                          });
+                                        }
                                         Navigator.pop(context);
                                       },
                                     )
                                   ],
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20)),
                                 );
                               });
                         },
@@ -249,10 +254,31 @@ class _HomePageState extends State<HomePage> {
                             color: Colors.white),
                         child: RefreshIndicator(
                           onRefresh: _refresh,
-                          child: ListView.builder(
-                            itemCount: toDoList.length,
-                            itemBuilder: itemBuilder,
-                          ),
+                          child: toDoList.isEmpty
+                              ? Center(
+                                  child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "Sua listinha ta vazia bb",
+                                      style: GoogleFonts.rubik(
+                                          color: Colors.black,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w200,
+                                          shadows: [
+                                            Shadow(
+                                                color: Colors.black,
+                                                offset: Offset(0, 0),
+                                                blurRadius: 2)
+                                          ]),
+                                    ),
+                                    Icon(Icons.add_task)
+                                  ],
+                                ))
+                              : ListView.builder(
+                                  itemCount: toDoList.length,
+                                  itemBuilder: itemBuilder,
+                                ),
                         ),
                       ),
                     ),
