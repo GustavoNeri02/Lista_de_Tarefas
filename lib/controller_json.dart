@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 
 class ControllerJson {
-
 //Pegar arquivo .json
   Future<File> getFile() async {
     //pegando diretorio tanto de android como de ios
@@ -20,7 +19,7 @@ class ControllerJson {
   }
 
 //Ler arquivo .json
-  Future<String> readData() async {
+  Future<String?> readData() async {
     try {
       final file = await getFile();
       return file.readAsString();

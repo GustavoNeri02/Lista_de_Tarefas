@@ -1,7 +1,5 @@
 import 'dart:convert';
-import 'dart:ui';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lista_de_tarefas/controller_json.dart';
@@ -17,8 +15,8 @@ class _HomePageState extends State<HomePage> {
   TextEditingController textController = new TextEditingController();
   ControllerJson controllerJson = new ControllerJson();
   List toDoList = [];
-  Map<String, dynamic> _lastRemoved;
-  int _lastRemovedPos;
+  Map<String, dynamic> _lastRemoved = {};
+  int? _lastRemovedPos;
 
   void addToDo() {
     Map<String, dynamic> newToDo = Map();
@@ -144,7 +142,7 @@ class _HomePageState extends State<HomePage> {
               label: "Desfazer",
               onPressed: () {
                 setState(() {
-                  toDoList.insert(_lastRemovedPos, _lastRemoved);
+                  toDoList.insert(_lastRemovedPos!, _lastRemoved);
                   controllerJson.saveFileData(toDoList);
                 });
               },
@@ -165,7 +163,7 @@ class _HomePageState extends State<HomePage> {
 
     controllerJson.readData().then((value) => {
           setState(() {
-            toDoList = jsonDecode(value);
+            toDoList = jsonDecode(value ?? '');
           })
         });
   }
