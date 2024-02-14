@@ -28,13 +28,14 @@ class ControllerAvatar {
 
   Future saveImage(File image) async {
     final directory = await getApplicationDocumentsDirectory();
-    image.copy("${directory.path}/image1.png");
+    image.copy("${directory.path}/image_avatar.png");
   }
 
   Future<File?> getImage() async {
     final directory = await getApplicationDocumentsDirectory();
-    if (File("${directory.path}/image1.png").existsSync()) {
-      return File("${directory.path}/image1.png");
+    final File imageFile = File("${directory.path}/image_avatar.png");
+    if (imageFile.existsSync()) {
+      return imageFile;
     } else {
       return null;
     }
@@ -42,8 +43,9 @@ class ControllerAvatar {
 
   Future deleteImage() async {
     final directory = await getApplicationDocumentsDirectory();
-    if (await File("${directory.path}/image1.png").exists()) {
-      File("${directory.path}/image1.png").delete(recursive: true);
+    final File imageFile = File("${directory.path}/image_avatar.png");
+    if (await imageFile.exists()) {
+      imageFile.delete(recursive: true);
     }
   }
 }
