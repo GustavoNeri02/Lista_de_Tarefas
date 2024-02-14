@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:lista_de_tarefas/controller_avatar.dart';
+import 'package:lista_de_tarefas/controllers/controller_avatar.dart';
 
 class IconAvatarWidget extends StatefulWidget {
   @override

@@ -3,25 +3,33 @@ import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
 
-class ControllerJson {
-//Pegar arquivo .json
+class LocalDataSource {
+  //Pegar arquivo .json
   Future<File> getFile() async {
     //pegando diretorio tanto de android como de ios
     final directory = await getApplicationDocumentsDirectory();
-    return File("${directory.path}/listaData.json");
+    final file = File("${directory.path}/listaData.json");
+    return file;
   }
 
 //Salvar arquivo .json
-  Future<File> saveFileData(List toDoList) async {
-    String data = json.encode(toDoList);
+  Future<void> saveFileData(List toDoList) async {
     final file = await getFile();
-    return file.writeAsString(data);
+    if (toDoList.isEmpty) {
+      if (file.existsSync()) file.deleteSync();
+    } else {
+      String data = json.encode(toDoList);
+      if (!file.existsSync()) file.createSync();
+      file.writeAsString(data);
+    }
   }
 
 //Ler arquivo .json
   Future<String?> readData() async {
     try {
       final file = await getFile();
+      if (!file.existsSync()) return null;
+
       return file.readAsString();
     } catch (e) {
       return null;

@@ -1,10 +1,10 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lista_de_tarefas/controller_json.dart';
+import 'package:lista_de_tarefas/controllers/to_do_list_controller.dart';
 import 'package:lista_de_tarefas/widgets/atual_date_widget.dart';
 import 'package:lista_de_tarefas/widgets/icon_avatar.dart';
+
+import '../widgets/on_empty_message_widget.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -12,40 +12,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  TextEditingController textController = new TextEditingController();
-  ControllerJson controllerJson = new ControllerJson();
-  List toDoList = [];
+  final controller = ToDoListController();
+
   Map<String, dynamic> _lastRemoved = {};
   int? _lastRemovedPos;
-
-  void addToDo() {
-    Map<String, dynamic> newToDo = Map();
-    newToDo["title"] = textController.text;
-    newToDo["ok"] = false;
-    toDoList.add(newToDo);
-    controllerJson.saveFileData(toDoList);
-  }
-
-  Future<Null> _refresh() async {
-    await Future.delayed(Duration(seconds: 1));
-
-    setState(() {
-      toDoList.sort((a, b) {
-        return a['title'].toLowerCase().compareTo(b['title'].toLowerCase());
-      });
-      toDoList.sort((a, b) {
-        if (a["ok"] && !b["ok"])
-          return 1;
-        else if (!a["ok"] && b["ok"])
-          return -1;
-        else
-          return 0;
-      });
-      controllerJson.saveFileData(toDoList);
-    });
-
-    return null;
-  }
 
   Widget itemBuilder(context, index) {
     return Dismissible(
@@ -84,43 +54,44 @@ class _HomePageState extends State<HomePage> {
                   offset: Offset(0, 0))
             ],
             borderRadius: BorderRadius.circular(20),
-            gradient: LinearGradient(colors: [
-              Color(0XFFe2cfea),
-              Color(0XFF8B54C9),
-              Color(0XFF6200b3)
-            ], stops: [
-              0,
-              0.9,
-              1
-            ], transform: GradientRotation(0.3), tileMode: TileMode.repeated),
+            gradient: LinearGradient(
+              colors: [Color(0XFFe2cfea), Color(0XFF8B54C9), Color(0XFF6200b3)],
+              stops: [0, 0.75, 1],
+              transform: GradientRotation(0.3),
+              tileMode: TileMode.repeated,
+            ),
           ),
           child: ListTile(
             title: Text(
-              toDoList[index]["title"],
+              controller.toDoList[index]["title"],
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
               style: GoogleFonts.rubik(
                   fontSize: 20,
                   color: Colors.black,
                   shadows: [
                     Shadow(
-                        color: Colors.black,
-                        blurRadius: 0.5,
-                        offset: Offset(0, 0))
+                      color: Colors.black,
+                      blurRadius: 0.2,
+                      offset: Offset(0, 0),
+                    )
                   ]),
             ),
             trailing: CircleAvatar(
               backgroundColor: Colors.transparent,
               radius: 15,
-              child: toDoList[index]["ok"]
+              child: controller.toDoList[index]["ok"]
                   ? Icon(
-                      Icons.auto_awesome,
+                      Icons.star,
                       color: Colors.yellow,
                     )
                   : Icon(Icons.star_border),
             ),
             onTap: () {
               setState(() {
-                toDoList[index]["ok"] = !toDoList[index]["ok"];
-                controllerJson.saveFileData(toDoList);
+                controller.toDoList[index]["ok"] =
+                    !controller.toDoList[index]["ok"];
+                controller.saveToDoList();
               });
             },
             contentPadding: EdgeInsets.symmetric(horizontal: 20),
@@ -130,11 +101,11 @@ class _HomePageState extends State<HomePage> {
       direction: DismissDirection.horizontal,
       onDismissed: (direction) {
         setState(() {
-          _lastRemoved = Map.from(toDoList[index]);
+          _lastRemoved = Map.from(controller.toDoList[index]);
           _lastRemovedPos = index;
-          toDoList.removeAt(index);
+          controller.toDoList.removeAt(index);
 
-          controllerJson.saveFileData(toDoList);
+          controller.saveToDoList();
 
           final _snackbar = SnackBar(
             content: Text("Tarefa \"${_lastRemoved["title"]}\" removida!"),
@@ -142,8 +113,8 @@ class _HomePageState extends State<HomePage> {
               label: "Desfazer",
               onPressed: () {
                 setState(() {
-                  toDoList.insert(_lastRemovedPos!, _lastRemoved);
-                  controllerJson.saveFileData(toDoList);
+                  controller.toDoList.insert(_lastRemovedPos!, _lastRemoved);
+                  controller.saveToDoList();
                 });
               },
             ),
@@ -158,14 +129,10 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
-  void initState() {
-    super.initState();
-
-    controllerJson.readData().then((value) => {
-          setState(() {
-            toDoList = jsonDecode(value ?? '');
-          })
-        });
+  void didChangeDependencies() async {
+    super.didChangeDependencies();
+    await controller.fetchToDoList();
+    setState(() {});
   }
 
   @override
@@ -176,10 +143,11 @@ class _HomePageState extends State<HomePage> {
           Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                  colors: [Color(0XFF6200b3), Color(0XFF8B54C9)],
-                  stops: [0, 0.7],
-                  transform: GradientRotation(0.3),
-                  tileMode: TileMode.repeated),
+                colors: [Color(0XFF6200b3), Color(0XFF8B54C9)],
+                stops: [0, 0.7],
+                transform: GradientRotation(0.3),
+                tileMode: TileMode.repeated,
+              ),
             ),
           ),
           Padding(
@@ -198,14 +166,14 @@ class _HomePageState extends State<HomePage> {
                           color: Colors.white,
                         ),
                         onPressed: () {
-                          textController.text = "";
+                          controller.textController.text = "";
                           showDialog(
                               context: context,
                               builder: (context) {
                                 return AlertDialog(
                                   title: Text("Adicionar nova tarefa"),
                                   content: TextField(
-                                    controller: textController,
+                                    controller: controller.textController,
                                     decoration: InputDecoration(
                                         labelText: "Digite aqui"),
                                   ),
@@ -213,18 +181,18 @@ class _HomePageState extends State<HomePage> {
                                     TextButton(
                                       child: Text("Cancelar"),
                                       onPressed: () {
-                                        textController.text = "";
+                                        controller.textController.text = "";
                                         Navigator.pop(context);
                                       },
                                     ),
                                     TextButton(
                                       child: Text("Ok"),
                                       onPressed: () {
-                                        if (textController.text != "") {
+                                        if (controller.textController.text !=
+                                            "") {
                                           setState(() {
-                                            addToDo();
-                                            controllerJson
-                                                .saveFileData(toDoList);
+                                            controller.addToDo();
+                                            controller.saveToDoList();
                                           });
                                         }
                                         Navigator.pop(context);
@@ -232,7 +200,8 @@ class _HomePageState extends State<HomePage> {
                                     )
                                   ],
                                   shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20)),
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
                                 );
                               });
                         },
@@ -248,33 +217,21 @@ class _HomePageState extends State<HomePage> {
                       borderRadius: BorderRadius.circular(20),
                       child: Container(
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Colors.white),
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.white,
+                        ),
                         child: RefreshIndicator(
-                          onRefresh: _refresh,
-                          child: toDoList.isEmpty
-                              ? Center(
-                                  child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      "Sua listinha ta vazia bb",
-                                      style: GoogleFonts.rubik(
-                                          color: Colors.black,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w200,
-                                          shadows: [
-                                            Shadow(
-                                                color: Colors.black,
-                                                offset: Offset(0, 0),
-                                                blurRadius: 2)
-                                          ]),
-                                    ),
-                                    Icon(Icons.add_task)
-                                  ],
-                                ))
+                          onRefresh: () async {
+                            await controller.refresh();
+                            setState(() {});
+                          },
+                          child: controller.toDoList.isEmpty
+                              ? EmptyMessage()
                               : ListView.builder(
-                                  itemCount: toDoList.length,
+                                  physics: AlwaysScrollableScrollPhysics(
+                                    parent: BouncingScrollPhysics(),
+                                  ),
+                                  itemCount: controller.toDoList.length,
                                   itemBuilder: itemBuilder,
                                 ),
                         ),

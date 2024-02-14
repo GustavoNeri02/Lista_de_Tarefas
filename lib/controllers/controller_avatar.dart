@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -19,12 +18,10 @@ class ControllerAvatar {
         saveImage(_image);
       } else {
         deleteImage();
-        print("Nenhuma imagem selecionada");
       }
 
       return _image;
     } catch (e) {
-      debugPrint(e.toString() + StackTrace.current.toString());
       return null;
     }
   }
@@ -47,7 +44,6 @@ class ControllerAvatar {
     final directory = await getApplicationDocumentsDirectory();
     if (await File("${directory.path}/image1.png").exists()) {
       File("${directory.path}/image1.png").delete(recursive: true);
-      print('Avatar removido!');
     }
   }
 }
