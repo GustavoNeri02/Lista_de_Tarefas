@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:lista_de_tarefas/controllers/controller_avatar.dart';
+import 'package:lista_de_tarefas/utils/keys.dart';
 
 class IconAvatarWidget extends StatefulWidget {
   @override
@@ -24,6 +25,7 @@ class _IconAvatarWidgetState extends State<IconAvatarWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      key: Keys.userAvatar,
       child: Container(
           height: 75,
           width: 75,

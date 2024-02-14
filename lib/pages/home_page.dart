@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lista_de_tarefas/controllers/to_do_list_controller.dart';
+import 'package:lista_de_tarefas/utils/keys.dart';
 import 'package:lista_de_tarefas/widgets/atual_date_widget.dart';
 import 'package:lista_de_tarefas/widgets/icon_avatar.dart';
 
@@ -161,6 +162,7 @@ class _HomePageState extends State<HomePage> {
                       IconAvatarWidget(),
                       //adicionar tarefas
                       IconButton(
+                        key: Keys.addTarefaButton,
                         icon: Icon(
                           Icons.add,
                           color: Colors.white,
@@ -213,6 +215,7 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(height: 20),
                   //Lista de widgets
                   Expanded(
+                    key: Keys.todoList,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
                       child: Container(
