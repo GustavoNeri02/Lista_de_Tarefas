@@ -1,0 +1,62 @@
+PODS:
+  - CocoaAsyncSocket (7.6.5)
+  - Flutter (1.0.0)
+  - HTTPParserC (2.9.4)
+  - image_picker (0.0.1):
+    - Flutter
+  - integration_test (0.0.1):
+    - Flutter
+  - path_provider_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
+  - patrol (0.0.1):
+    - Flutter
+    - Telegraph (~> 0.30.0)
+  - permission_handler_apple (9.1.1):
+    - Flutter
+  - Telegraph (0.30.0):
+    - CocoaAsyncSocket (~> 7.6)
+    - HTTPParserC (~> 2.9)
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - image_picker (from `.symlinks/plugins/image_picker/ios`)
+  - integration_test (from `.symlinks/plugins/integration_test/ios`)
+  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/ios`)
+  - patrol (from `.symlinks/plugins/patrol/ios`)
+  - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
+
+SPEC REPOS:
+  trunk:
+    - CocoaAsyncSocket
+    - HTTPParserC
+    - Telegraph
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  image_picker:
+    :path: ".symlinks/plugins/image_picker/ios"
+  integration_test:
+    :path: ".symlinks/plugins/integration_test/ios"
+  path_provider_foundation:
+    :path: ".symlinks/plugins/path_provider_foundation/ios"
+  patrol:
+    :path: ".symlinks/plugins/patrol/ios"
+  permission_handler_apple:
+    :path: ".symlinks/plugins/permission_handler_apple/ios"
+
+SPEC CHECKSUMS:
+  CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
+  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  HTTPParserC: aea14c3d2d4ac5beb3988781daa36dfa62e0d9ef
+  image_picker: 50e7c7ff960e5f58faa4d1f4af84a771c671bc4a
+  integration_test: a1e7d09bd98eca2fc37aefd79d4f41ad37bdbbe5
+  path_provider_foundation: 29f094ae23ebbca9d3d0cec13889cd9060c0e943
+  patrol: 792c0bb6cc4d552fc8b37f49266341c39e659b4d
+  permission_handler_apple: e76247795d700c14ea09e3a2d8855d41ee80a2e6
+  Telegraph: 12576b119324138e4929792af9e5a1085c2ecbc1
+
+PODFILE CHECKSUM: ece965450c2f2fe3988a4b3d9343071bf42fcb0e
+
+COCOAPODS: 1.14.3

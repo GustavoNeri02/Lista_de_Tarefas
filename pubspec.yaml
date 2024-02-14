@@ -45,6 +45,19 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  integration_test:
+    sdk: flutter 
+
+  patrol: ^2.3.2
+
+  
+patrol:
+  app_name: lista_de_tarefas
+  android:
+    package_name: com.example.lista_de_tarefas
+  ios:
+    bundle_id: com.example.listaDeTarefas
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
