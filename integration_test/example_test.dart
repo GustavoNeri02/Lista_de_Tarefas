@@ -1,21 +1,34 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:lista_de_tarefas/main.dart';
+import 'package:lista_de_tarefas/utils/date_time_extension_utils.dart';
+import 'package:lista_de_tarefas/widgets/atual_date_widget.dart';
 import 'package:patrol/patrol.dart';
-import 'package:lista_de_tarefas/main.dart' as app;
 
 void main() {
-  patrolTest(
-    'counter state is the same after going to home and switching apps',
-    ($) async {
-      app.main();
-      await $.pumpAndSettle();
-
-      expect($('Patrol Poc'), findsNothing);
-
-      await $.native.pressHome();
-      await $.native.pressRecentApps();
-
-      await $.pumpAndSettle();
+  group(
+    'Home Page',
+    () {
+      patrolTest(
+        'AtualDateWidget test',
+        ($) async {
+          await $.pumpWidgetAndSettle(MyApp());
+          final DateTime now = DateTime.now();
+          expect($(AtualDateWidget), findsOneWidget);
+          expect($(AtualDateWidget).$(now.day.toString()), findsOneWidget);
+          expect(
+            $(AtualDateWidget).$(DateTimeExtension.weekDays[now.weekday]),
+            findsOneWidget,
+          );
+          expect(
+            $(AtualDateWidget).$(
+              "${DateTimeExtension.monthsYear[now.month - 1]} ${now.year}",
+            ),
+            findsOneWidget,
+          );
+        },
+        nativeAutomation: true,
+        tags: 'AtualDateWidget',
+      );
     },
-    nativeAutomation: true,
   );
 }

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lista_de_tarefas/utils/date_time_extension_utils.dart';
+
+import '../utils/keys.dart';
 
 class AtualDateWidget extends StatefulWidget {
   @override
@@ -7,33 +10,11 @@ class AtualDateWidget extends StatefulWidget {
 }
 
 class _AtualDateWidgetState extends State<AtualDateWidget> {
-  List<String> _weekDays = [
-    "Segunda-Feira",
-    "Terça-Feira",
-    "Quarta-Feira",
-    "Quinta-Feira",
-    "Sexta-Feira",
-    "Sábado",
-    "Domingo"
-  ];
-  List<String> _monthsYear = [
-    "Janeiro",
-    "Fevereiro",
-    "Março",
-    "Abril",
-    "Maio",
-    "Junho",
-    "Julho",
-    "Agosto",
-    "Setembro",
-    "Outubro",
-    "Novembro",
-    "Dezembro"
-  ];
   DateTime now = DateTime.now();
   @override
   Widget build(BuildContext context) {
     return Container(
+      key: Keys.atualDateWidget,
       height: 75,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -44,46 +25,48 @@ class _AtualDateWidgetState extends State<AtualDateWidget> {
               color: Colors.white,
               fontSize: 70,
               shadows: [
-                Shadow(color: Colors.black, offset: Offset(0, 0), blurRadius: 2)
+                Shadow(
+                  color: Colors.black,
+                  offset: Offset(0, 0),
+                  blurRadius: 2,
+                )
               ],
             ),
           ),
-          SizedBox(
-            width: 10,
-          ),
+          SizedBox(width: 10),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text(
-                "${_weekDays[now.weekday-1]}",
+                "${DateTimeExtension.weekDays[now.weekday]}",
                 style: GoogleFonts.rubik(
                     color: Colors.white,
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                     shadows: [
                       Shadow(
-                          color: Colors.black,
-                          offset: Offset(0, 0),
-                          blurRadius: 2)
+                        color: Colors.black,
+                        offset: Offset(0, 0),
+                        blurRadius: 2,
+                      )
                     ]),
               ),
               Text(
-                "${_monthsYear[now.month - 1]} ${now.year}",
+                "${DateTimeExtension.monthsYear[now.month - 1]} ${now.year}",
                 style: GoogleFonts.rubik(
                     color: Colors.white,
                     fontSize: 20,
                     fontWeight: FontWeight.w200,
                     shadows: [
                       Shadow(
-                          color: Colors.black,
-                          offset: Offset(0, 0),
-                          blurRadius: 2)
+                        color: Colors.black,
+                        offset: Offset(0, 0),
+                        blurRadius: 2,
+                      )
                     ]),
               ),
-              SizedBox(
-                height: 7,
-              )
+              SizedBox(height: 7)
             ],
           )
         ],
