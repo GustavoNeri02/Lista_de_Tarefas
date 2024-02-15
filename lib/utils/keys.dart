@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 class Keys {
-  static const atualDateWidget = Key('atualDateWidget');
+  static const currentDateWidget = Key('currentDateWidget');
   static const userAvatar = Key('userAvatar');
   static const addTarefaButton = Key('addTarefaButton');
   static const addTarefaModal = Key('addTarefaModal');
@@ -9,5 +9,5 @@ class Keys {
   static const addTarefaModalOkButton = Key('addTarefaModalOkButton');
   static const addTarefaModalCancelarButton =
       Key('addTarefaModalCancelarButton');
-  static const todoList = Key('todoList');
+  static const toDoListBodyWidget = Key('toDoListBodyWidget');
 }

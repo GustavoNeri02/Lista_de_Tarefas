@@ -4,17 +4,17 @@ import 'package:lista_de_tarefas/utils/date_time_extension_utils.dart';
 
 import '../../../../../utils/keys.dart';
 
-class AtualDateWidget extends StatefulWidget {
+class CurrentDateWidget extends StatefulWidget {
   @override
-  _AtualDateWidgetState createState() => _AtualDateWidgetState();
+  _CurrentDateWidgetState createState() => _CurrentDateWidgetState();
 }
 
-class _AtualDateWidgetState extends State<AtualDateWidget> {
+class _CurrentDateWidgetState extends State<CurrentDateWidget> {
   DateTime now = DateTime.now();
   @override
   Widget build(BuildContext context) {
     return Container(
-      key: Keys.atualDateWidget,
+      key: Keys.currentDateWidget,
       height: 75,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,

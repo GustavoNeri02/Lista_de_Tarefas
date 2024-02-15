@@ -4,7 +4,7 @@ import 'package:lista_de_tarefas/app/modules/home/presentation/controllers/avata
 import 'package:lista_de_tarefas/app/modules/home/presentation/controllers/to_do_list_controller.dart';
 import 'package:lista_de_tarefas/app/modules/home/presentation/widgets/to_do_list_body_widget.dart';
 import 'package:lista_de_tarefas/utils/keys.dart';
-import 'package:lista_de_tarefas/app/modules/home/presentation/widgets/atual_date_widget.dart';
+import 'package:lista_de_tarefas/app/modules/home/presentation/widgets/current_date_widget.dart';
 import 'package:lista_de_tarefas/app/modules/home/presentation/widgets/icon_avatar.dart';
 
 import '../widgets/add_tarefa_modal_widget.dart';
@@ -68,7 +68,7 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                   SizedBox(height: 10),
-                  AtualDateWidget(),
+                  CurrentDateWidget(),
                   SizedBox(height: 20),
                   ToDoListBodyWidget(controller: toDoListController)
                 ],

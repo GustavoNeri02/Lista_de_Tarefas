@@ -13,7 +13,7 @@ class ToDoListBodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      key: Keys.todoList,
+      key: Keys.toDoListBodyWidget,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
         child: Container(

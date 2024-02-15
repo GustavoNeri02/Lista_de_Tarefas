@@ -29,11 +29,11 @@ class HomeRobot {
   }
 
   Future<void> findTodoList() async {
-    expect($(Keys.todoList), findsOneWidget);
+    expect($(Keys.toDoListBodyWidget), findsOneWidget);
   }
 
   Future<void> findAtualDateWidget() async {
-    expect($(Keys.atualDateWidget), findsOneWidget);
+    expect($(Keys.currentDateWidget), findsOneWidget);
   }
 
   Future<void> findAddTarefaModal() async {
@@ -45,13 +45,13 @@ class HomeRobot {
   Future<void> verifyAtualDateWidget() async {
     final DateTime now = DateTime.now();
     await findAtualDateWidget();
-    expect($(Keys.atualDateWidget).$(now.day.toString()), findsOneWidget);
+    expect($(Keys.currentDateWidget).$(now.day.toString()), findsOneWidget);
     expect(
-      $(Keys.atualDateWidget).$(DateTimeExtension.weekDays[now.weekday]),
+      $(Keys.currentDateWidget).$(DateTimeExtension.weekDays[now.weekday]),
       findsOneWidget,
     );
     expect(
-      $(Keys.atualDateWidget).$(
+      $(Keys.currentDateWidget).$(
         "${DateTimeExtension.monthsYear[now.month - 1]} ${now.year}",
       ),
       findsOneWidget,
