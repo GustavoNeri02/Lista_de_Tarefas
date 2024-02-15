@@ -4,15 +4,12 @@ import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 
 class LocalDataSource {
-  //Pegar arquivo .json
   Future<File> getFile() async {
-    //pegando diretorio tanto de android como de ios
     final directory = await getApplicationDocumentsDirectory();
     final file = File("${directory.path}/listaData.json");
     return file;
   }
 
-//Salvar arquivo .json
   Future<void> saveFileData(List toDoList) async {
     final file = await getFile();
     if (toDoList.isEmpty) {
@@ -24,7 +21,6 @@ class LocalDataSource {
     }
   }
 
-//Ler arquivo .json
   Future<String?> readData() async {
     try {
       final file = await getFile();

@@ -4,7 +4,13 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-class ControllerAvatar {
+import 'package:mobx/mobx.dart';
+
+part 'avatar_controller.g.dart';
+
+class AvatarController = AvatarControllerBase with _$AvatarController;
+
+abstract class AvatarControllerBase with Store {
   Future<File?> handleTapAvatar() async {
     File? _image;
     try {
@@ -15,9 +21,9 @@ class ControllerAvatar {
 
       if (pickedFile != null) {
         _image = File(pickedFile.path);
-        saveImage(_image);
+        await saveImage(_image);
       } else {
-        deleteImage();
+        await deleteImage();
       }
 
       return _image;

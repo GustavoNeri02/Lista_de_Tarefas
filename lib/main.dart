@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:lista_de_tarefas/pages/home_page.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+
+import 'app/app_module.dart';
+import 'app/app_widget.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({
@@ -8,10 +11,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: HomePage(),
-    );
+    return ModularApp(module: AppModule(), child: const AppWidget());
   }
 }
 

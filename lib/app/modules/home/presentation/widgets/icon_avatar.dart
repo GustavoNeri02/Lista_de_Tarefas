@@ -1,27 +1,29 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:lista_de_tarefas/controllers/controller_avatar.dart';
+import 'package:lista_de_tarefas/app/modules/home/presentation/controllers/avatar_controller.dart';
 import 'package:lista_de_tarefas/utils/keys.dart';
 
 class IconAvatarWidget extends StatefulWidget {
+  const IconAvatarWidget({required this.controller});
+
   @override
   Key? get key => Keys.userAvatar;
+
+  final AvatarController controller;
 
   @override
   _IconAvatarWidgetState createState() => _IconAvatarWidgetState();
 }
 
 class _IconAvatarWidgetState extends State<IconAvatarWidget> {
-  ControllerAvatar controllerAvatar = ControllerAvatar();
-
   File? _image;
 
   @override
   void initState() {
     super.initState();
     setState(() {
-      controllerAvatar.getImage().then((value) => _image = value);
+      widget.controller.getImage().then((value) => _image = value);
     });
   }
 
@@ -58,7 +60,7 @@ class _IconAvatarWidgetState extends State<IconAvatarWidget> {
                   ),
           )),
       onTap: () async {
-        final File? newImage = await controllerAvatar.handleTapAvatar();
+        final File? newImage = await widget.controller.handleTapAvatar();
         setState(() {
           _image = newImage;
         });
