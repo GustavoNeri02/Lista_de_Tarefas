@@ -87,6 +87,24 @@ void main() {
         nativeAutomation: true,
         tags: 'deleteAvatarImage',
       );
+
+      patrolTest(
+        'Inserir nova Tarefa',
+        ($) async {
+          await $.pumpWidgetAndSettle(MyApp());
+          final homeRobot = HomeRobot($);
+
+          await homeRobot.tapAddTarefaButton();
+          await homeRobot.findAddTarefaModal();
+          await homeRobot.insertTarefaTitle('teste tarefa');
+          await homeRobot.tapAddTarefaModalOkButton();
+
+          await homeRobot.findUserAvatar(hasImage: false);
+
+          await $.pumpAndSettle();
+        },
+        tags: 'insertNewTarefa',
+      );
     },
   );
 }

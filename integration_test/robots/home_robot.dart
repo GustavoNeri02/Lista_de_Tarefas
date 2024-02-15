@@ -36,6 +36,10 @@ class HomeRobot {
     expect($(Keys.atualDateWidget), findsOneWidget);
   }
 
+  Future<void> findAddTarefaModal() async {
+    expect($(Keys.addTarefaModal), findsOneWidget);
+  }
+
   /// Actions
 
   Future<void> verifyAtualDateWidget() async {
@@ -57,6 +61,28 @@ class HomeRobot {
   Future<void> tapUserAvatar() async {
     await findUserAvatar();
     await $(Keys.userAvatar).tap();
+    await $.pumpAndSettle();
+    await Future.delayed(Duration(seconds: 1));
+  }
+
+  Future<void> tapAddTarefaButton() async {
+    await findAddTarefaButton();
+    await $(Keys.addTarefaButton).tap();
+    await $.pumpAndSettle();
+    await Future.delayed(Duration(seconds: 1));
+  }
+
+  Future<void> insertTarefaTitle(String title) async {
+    await findAddTarefaModal();
+    await $.pumpAndSettle();
+    await $(Keys.addTarefaTitleTextField).enterText(title);
+    await $.pumpAndSettle();
+  }
+
+  Future<void> tapAddTarefaModalOkButton() async {
+    await findAddTarefaModal();
+    await $(Keys.addTarefaModal).$(Keys.addTarefaModalOkButton).tap();
+    await $.pumpAndSettle();
     await Future.delayed(Duration(seconds: 1));
   }
 }

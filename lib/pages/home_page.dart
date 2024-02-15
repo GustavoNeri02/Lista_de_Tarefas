@@ -173,15 +173,19 @@ class _HomePageState extends State<HomePage> {
                               context: context,
                               builder: (context) {
                                 return AlertDialog(
+                                  key: Keys.addTarefaModal,
                                   title: Text("Adicionar nova tarefa"),
                                   content: TextField(
+                                    key: Keys.addTarefaTitleTextField,
                                     controller: controller.textController,
                                     decoration: InputDecoration(
-                                        labelText: "Digite aqui"),
+                                      labelText: "Digite aqui",
+                                    ),
                                   ),
                                   actions: [
                                     TextButton(
                                       child: Text("Cancelar"),
+                                      key: Keys.addTarefaModalCancelarButton,
                                       onPressed: () {
                                         controller.textController.text = "";
                                         Navigator.pop(context);
@@ -189,6 +193,7 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                     TextButton(
                                       child: Text("Ok"),
+                                      key: Keys.addTarefaModalOkButton,
                                       onPressed: () {
                                         if (controller.textController.text !=
                                             "") {
