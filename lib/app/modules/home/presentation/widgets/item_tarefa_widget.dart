@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lista_de_tarefas/app/modules/home/presentation/widgets/undo_delete_tarefa_snackbar_widget.dart';
+import 'package:lista_de_tarefas/utils/keys.dart';
 
 import '../controllers/to_do_list_controller.dart';
 
@@ -18,6 +19,7 @@ class ItemTarefaWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dismissible(
+      key: Keys.itemTarefaDismissableWidget(index),
       background: Container(
         color: Colors.white,
         child: Padding(
@@ -39,7 +41,6 @@ class ItemTarefaWidget extends StatelessWidget {
           ),
         ),
       ),
-      key: Key(DateTime.now().millisecondsSinceEpoch.toString()),
       child: Padding(
         padding: const EdgeInsets.only(right: 10, left: 10, top: 10, bottom: 5),
         child: Container(

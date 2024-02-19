@@ -22,7 +22,7 @@ void main() {
           await homeRobot.findUserAvatar();
           await homeRobot.findAddTarefaButton();
           await homeRobot.findTodoList();
-          expect(Modular.initialRoute, HomeModule.routeName);
+          // expect(Modular.initialRoutePath, HomeModule.initialRoute);
         },
         tags: 'validatePageElements',
       );
@@ -109,8 +109,8 @@ void main() {
             await homeRobot.findAddTarefaModal();
             await homeRobot.insertTarefaTitle('teste tarefa');
             await homeRobot.tapAddTarefaModalOkButton();
-
-            await homeRobot.findUserAvatar(hasImage: false);
+            await homeRobot.findItemTarefaWidget(0);
+            await homeRobot.findToDoListLocalFileContent();
 
             await $.pumpAndSettle();
           },

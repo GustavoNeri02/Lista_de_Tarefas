@@ -8,7 +8,7 @@ class IconAvatarWidget extends StatefulWidget {
   const IconAvatarWidget({required this.controller});
 
   @override
-  Key? get key => Keys.userAvatar;
+  Key? get key => Keys.userAvatarWidget;
 
   final AvatarController controller;
 

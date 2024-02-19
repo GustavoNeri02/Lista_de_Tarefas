@@ -15,9 +15,9 @@ class HomeRobot {
   /// Finders
 
   Future<void> findUserAvatar({bool? hasImage}) async {
-    expect($(Keys.userAvatar), findsOneWidget);
+    expect($(Keys.userAvatarWidget), findsOneWidget);
     if (hasImage ?? false) {
-      expect($(Keys.userAvatar).$(Icons.person_add), findsNothing);
+      expect($(Keys.userAvatarWidget).$(Icons.person_add), findsNothing);
       final directory = await getApplicationDocumentsDirectory();
       final File imageFile = File("${directory.path}/image_avatar.png");
       expect(imageFile.existsSync(), true);
@@ -40,6 +40,21 @@ class HomeRobot {
     expect($(Keys.addTarefaModal), findsOneWidget);
   }
 
+  Future<void> findItemTarefaWidget(int index) async {
+    expect($(Keys.itemTarefaDismissableWidget(index)), findsOneWidget);
+  }
+
+  Future<void> findToDoListLocalFileContent() async {
+    final directory = await getApplicationDocumentsDirectory();
+    final file = File("${directory.path}/listaData.json");
+
+    expect(file.existsSync(), equals(true));
+
+    final String content = await file.readAsString();
+
+    expect(content.isNotEmpty, equals(true));
+  }
+
   /// Actions
 
   Future<void> verifyAtualDateWidget() async {
@@ -60,7 +75,7 @@ class HomeRobot {
 
   Future<void> tapUserAvatar() async {
     await findUserAvatar();
-    await $(Keys.userAvatar).tap();
+    await $(Keys.userAvatarWidget).tap();
     await $.pumpAndSettle();
     await Future.delayed(Duration(seconds: 1));
   }
